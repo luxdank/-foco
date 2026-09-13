@@ -68,27 +68,63 @@ function withTimeout<T>(promise: Promise<T>, ms: number, fallback: T): Promise<T
   ]);
 }
 
-function fallbackProfile(user: FirebaseUser): UserProfile {
+const PROFILE_CACHE_PREFIX = 'foco:profile:';
+
+function cacheProfile(profile: UserProfile): void {
+  try {
+    localStorage.setItem(PROFILE_CACHE_PREFIX + profile.id, JSON.stringify(profile));
+  } catch {
+    // localStorage indisponível (modo privado, etc.) — ignora.
+  }
+}
+
+function loadCachedProfile(uid: string): UserProfile | null {
+  try {
+    const raw = localStorage.getItem(PROFILE_CACHE_PREFIX + uid);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed.role === 'string' && typeof parsed.name === 'string') {
+      return parsed as UserProfile;
+    }
+  } catch {
+    // Cache corrompido — ignora.
+  }
+  return null;
+}
+
+function fallbackProfile(user: FirebaseUser, roleHint?: UserRole): UserProfile {
+  const cached = loadCachedProfile(user.uid);
+  // O papel escolhido na tela de login (ex.: "Sou Professor") tem prioridade sobre
+  // um cache antigo — impede que um cache desatualizado de 'aluno' redirecione um
+  // professor para a Sala Virtual.
+  const role = roleHint ?? cached?.role ?? 'aluno';
   const baseName = user.email?.split('@')[0] ?? 'usuario';
+  // Só reaproveita o nome/avatar do cache se o papel do cache bater com o papel final.
+  const matchesRole = cached && cached.role === role;
   return {
     id: user.uid,
-    role: 'aluno',
-    name: user.displayName ?? baseName,
-    avatar: APP_IMAGES.userProfile,
-    details: 'Conta criada pelo e-mail',
+    role,
+    name: matchesRole ? cached.name : user.displayName ?? baseName,
+    avatar:
+      (matchesRole ? cached.avatar : undefined) ??
+      (role === 'professor' ? APP_IMAGES.teachers.ricardoMendes : APP_IMAGES.userProfile),
+    details: matchesRole ? cached.details ?? '' : 'Conta criada pelo e-mail',
+    subject: matchesRole ? cached.subject : undefined,
+    room: matchesRole ? cached.room : undefined,
+    classGroup: matchesRole ? cached.classGroup : undefined,
     email: user.email ?? ''
   };
 }
 
-export async function loadProfile(user: FirebaseUser): Promise<UserProfile> {
-  const fallback = fallbackProfile(user);
+export async function loadProfile(user: FirebaseUser, roleHint?: UserRole): Promise<UserProfile> {
+  const fallback = fallbackProfile(user, roleHint);
   try {
     const snap = await withTimeout(getDoc(doc(getDb(), 'usuarios', user.uid)), 4000, null);
     if (snap && snap.exists()) {
       const data = snap.data() as ProfileDoc;
       const role = data.tipo ?? data.role ?? 'aluno';
       const name = data.nome ?? data.name ?? user.email?.split('@')[0] ?? 'Estudante';
-      return {
+      const profile: UserProfile = {
         id: user.uid,
         role,
         name,
@@ -99,10 +135,13 @@ export async function loadProfile(user: FirebaseUser): Promise<UserProfile> {
         classGroup: data.classGroup,
         email: data.email ?? user.email ?? ''
       };
+      cacheProfile(profile);
+      return profile;
     }
   } catch {
-    // Se o Firestore estiver indisponível, usa os dados básicos da conta.
+    // Se o Firestore estiver indisponível, usa o papel escolhido + cache local.
   }
+  cacheProfile(fallback);
   return fallback;
 }
 
@@ -138,13 +177,59 @@ export async function signUp(input: SignUpInput): Promise<UserProfile> {
     classGroup: input.classGroup
   }).catch(() => {});
 
+  // Cache local garante que o papel (professor/aluno) persista mesmo sem Firestore.
+  cacheProfile(profile);
+
   return profile;
 }
 
-export async function signIn(email: string, password: string): Promise<UserProfile> {
+export async function signIn(
+  email: string,
+  password: string,
+  roleHint?: UserRole
+): Promise<UserProfile> {
   const auth = await initAuth();
   const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
-  return withTimeout(loadProfile(credential.user), 4000, fallbackProfile(credential.user));
+
+  // Exclusividade de papel: a conta só aceita entrar pela aba correspondente
+  // ("Sou Aluno" ↔ aluno, "Sou Professor" ↔ professor). Se o papel real da conta
+  // (cache local do cadastro/login anterior) divergir da aba escolhida, o acesso
+  // é bloqueado com instrução clara — impede aluno de cair no painel docente.
+  if (roleHint) {
+    const cached = loadCachedProfile(credential.user.uid);
+    let realRole = cached?.role;
+    if (!realRole) {
+      // Sem cache (ex.: primeiro acesso neste aparelho), verifica o papel
+      // definitivo registrado no Firestore no momento do cadastro.
+      try {
+        const snap = await withTimeout(
+          getDoc(doc(getDb(), 'usuarios', credential.user.uid)),
+          3000,
+          null
+        );
+        if (snap && snap.exists()) {
+          const data = snap.data() as ProfileDoc;
+          realRole = data.tipo ?? data.role;
+        }
+      } catch {
+        // Firestore indisponível — segue com o papel escolhido como fallback.
+      }
+    }
+    if (realRole && realRole !== roleHint) {
+      if (realRole === 'aluno') {
+        throw new Error(
+          'Esta conta é de um ALUNO. Para entrar como aluno, selecione "Sou Aluno" e faça o login.'
+        );
+      }
+      throw new Error(
+        'Esta conta é de um PROFESSOR. Para entrar como docente, selecione "Sou Professor" e faça o login.'
+      );
+    }
+  }
+
+  const profile = await loadProfile(credential.user, roleHint);
+  cacheProfile(profile);
+  return profile;
 }
 
 export function onAuthChange(cb: (user: FirebaseUser | null) => void): () => void {

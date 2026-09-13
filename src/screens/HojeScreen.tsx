@@ -63,7 +63,7 @@ export const HojeScreen: React.FC<HojeScreenProps> = ({
 
       {/* SALA VIRTUAL AO VIVO (Iniciada com autonomia pelo Professor) */}
       {virtualRoom && virtualRoom.isActive && (
-        <div className="bg-gradient-to-r from-[#005d3e] via-[#004b32] to-[#0b1c30] text-white p-4 sm:p-5 rounded-3xl shadow-lg border border-[#6ffbbe]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
+        <div className="bg-gradient-to-r from-[#005d3e] via-[#004b32] to-[#0b1c30] text-white p-4 sm:p-5 rounded-[1.9rem] border-2 border-[#6ffbbe]/40 shadow-[0_18px_40px_-18px_rgba(0,93,62,0.6)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-[#6ffbbe]/20 text-[#6ffbbe] flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[26px] animate-pulse">
@@ -92,7 +92,7 @@ export const HojeScreen: React.FC<HojeScreenProps> = ({
           <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
             <button
               onClick={onEnterVirtualRoom}
-              className="px-4 py-2.5 rounded-xl bg-[#6ffbbe] hover:bg-[#52ebb0] text-[#005236] font-bold text-[13px] flex items-center gap-2 transition-all shadow-md active:scale-95"
+              className="px-4 py-2.5 rounded-xl bg-[#6ffbbe] hover:bg-[#52ebb0] text-[#005236] font-bold text-[13px] flex items-center gap-2 transition-all active:scale-95 cartoon-btn"
             >
               <span className="material-symbols-outlined text-[18px]">co_present</span>
               <span>Entrar como Aluno</span>
@@ -104,7 +104,7 @@ export const HojeScreen: React.FC<HojeScreenProps> = ({
       {/* Card Destaque: Aula Ao Vivo em Andamento */}
       <div
         onClick={() => onNavigate('foco-ativo')}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#3a34d3] via-[#5452ec] to-[#4946e1] text-white p-5 shadow-xl shadow-[#3a34d3]/20 transition-all duration-300 hover:shadow-2xl hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+        className="relative overflow-hidden rounded-[1.9rem] border-2 border-white/25 bg-gradient-to-br from-[#3a34d3] via-[#5452ec] to-[#4946e1] text-white p-5 shadow-[0_20px_44px_-18px_rgba(58,52,211,0.5)] transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
       >
         <div className="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
         <div className="absolute top-0 right-0 p-3 opacity-15 pointer-events-none">
@@ -147,7 +147,7 @@ export const HojeScreen: React.FC<HojeScreenProps> = ({
                 e.stopPropagation();
                 onNavigate('foco-ativo');
               }}
-              className="w-full h-12 bg-white text-[#3a34d3] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 shadow-md hover:bg-[#f8f9ff] transition-all active:scale-[0.98]"
+              className="w-full h-12 bg-white text-[#3a34d3] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 hover:bg-[#f8f9ff] transition-all active:scale-[0.98] cartoon-btn"
             >
               <span
                 className="material-symbols-outlined text-[20px] text-[#3a34d3]"
@@ -162,7 +162,7 @@ export const HojeScreen: React.FC<HojeScreenProps> = ({
       </div>
 
       {/* Widget Ritmo de Foco & Presença */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-[#e5eeff] flex flex-col gap-3">
+      <div className="cartoon-card bg-white p-5 border-[#e2dfff] flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 rounded-xl bg-[#ffdad3] flex items-center justify-center text-[#b22200]">
@@ -228,7 +228,7 @@ export const HojeScreen: React.FC<HojeScreenProps> = ({
 
         <div className="flex flex-col gap-3">
           {/* Card Tarefa 1 */}
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e5eeff] flex flex-col gap-2.5 transition-all hover:border-[#c1c1ff]">
+          <div className="bg-white rounded-[1.9rem] p-4 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] flex flex-col gap-2.5 transition-all hover:border-[#c1c1ff]">
             <div className="flex items-start justify-between gap-2">
               <div className="flex flex-col gap-0.5 min-w-0">
                 <span className="text-[10px] text-[#3a34d3] font-extrabold uppercase tracking-wide">

@@ -32,7 +32,7 @@ export const EuScreen: React.FC<EuScreenProps> = ({
   return (
     <div className="flex flex-col w-full gap-5 pb-12">
       {/* Profile Card */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-[#e5eeff] flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+      <div className="cartoon-card bg-white p-5 border-[#e2dfff] flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
         <div className="relative">
           <img
             src={currentUser.avatar}
@@ -64,7 +64,7 @@ export const EuScreen: React.FC<EuScreenProps> = ({
       <div className="grid grid-cols-1 gap-2.5">
         <button
           onClick={onLogout}
-          className="p-3 rounded-xl bg-white hover:bg-[#ffdad3]/30 text-[#b22200] font-bold text-[12px] flex items-center justify-center gap-1.5 transition-all active:scale-95 border border-[#ffdad3]"
+          className="p-3 rounded-[1.4rem] bg-white hover:bg-[#ffdad3]/30 text-[#b22200] font-bold text-[12px] flex items-center justify-center gap-1.5 transition-all active:scale-95 border-2 border-[#ffb4a4] shadow-[0_8px_20px_-12px_rgba(178,34,0,0.45)]"
         >
           <span className="material-symbols-outlined text-[18px]">logout</span>
           <span>Trocar Usuário / Sair</span>
@@ -73,25 +73,25 @@ export const EuScreen: React.FC<EuScreenProps> = ({
 
       {/* Estatísticas de Foco */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-        <div className="bg-white rounded-xl p-3.5 border border-[#e5eeff] text-center space-y-0.5">
+        <div className="bg-white rounded-[1.4rem] p-3.5 border-2 border-[#e2dfff] text-center space-y-0.5 shadow-[0_10px_24px_-14px_rgba(38,26,150,0.3)]">
           <span className="text-[22px] font-extrabold text-[#b22200] block">4 dias</span>
           <span className="text-[11px] font-bold text-[#464555] uppercase tracking-wider">
             Ofensiva 🔥
           </span>
         </div>
-        <div className="bg-white rounded-xl p-3.5 border border-[#e5eeff] text-center space-y-0.5">
+        <div className="bg-white rounded-[1.4rem] p-3.5 border-2 border-[#e2dfff] text-center space-y-0.5 shadow-[0_10px_24px_-14px_rgba(38,26,150,0.3)]">
           <span className="text-[22px] font-extrabold text-[#3a34d3] block">18.5 h</span>
           <span className="text-[11px] font-bold text-[#464555] uppercase tracking-wider">
             Foco Semanal
           </span>
         </div>
-        <div className="bg-white rounded-xl p-3.5 border border-[#e5eeff] text-center space-y-0.5">
+        <div className="bg-white rounded-[1.4rem] p-3.5 border-2 border-[#e2dfff] text-center space-y-0.5 shadow-[0_10px_24px_-14px_rgba(38,26,150,0.3)]">
           <span className="text-[22px] font-extrabold text-[#005d3e] block">88%</span>
           <span className="text-[11px] font-bold text-[#464555] uppercase tracking-wider">
             Presença
           </span>
         </div>
-        <div className="bg-white rounded-xl p-3.5 border border-[#e5eeff] text-center space-y-0.5">
+        <div className="bg-white rounded-[1.4rem] p-3.5 border-2 border-[#e2dfff] text-center space-y-0.5 shadow-[0_10px_24px_-14px_rgba(38,26,150,0.3)]">
           <span className="text-[22px] font-extrabold text-[#d73b19] block">14</span>
           <span className="text-[11px] font-bold text-[#464555] uppercase tracking-wider">
             Tarefas Entregues
@@ -166,7 +166,7 @@ export const EuScreen: React.FC<EuScreenProps> = ({
       </div>
 
       {/* Configurações do App */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e5eeff] space-y-3">
+      <div className="bg-white rounded-[1.9rem] p-4 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] space-y-3">
         <h3 className="text-[15px] font-bold text-[#0b1c30]">Preferências de Estudo</h3>
 
         <div className="flex items-center justify-between py-1">

@@ -1,4 +1,4 @@
-import { APP_IMAGES } from '../src/data/mockData';
+import { APP_IMAGES } from '../data/mockData';
 
 const API_KEY = 'AIzaSyBYyNbB_47_1SX1Kp0BsEOyYfv0Zbd7lec';
 const PROJECT_ID = 'videira-coffe';

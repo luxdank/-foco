@@ -53,7 +53,7 @@ export const TurmaScreen: React.FC = () => {
       </div>
 
       {/* Colegas em Foco Agora */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e5eeff] space-y-3">
+      <div className="bg-white rounded-[1.9rem] p-4 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-[13px] font-bold text-[#0b1c30] flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[#005d3e] animate-ping"></span>
@@ -111,7 +111,7 @@ export const TurmaScreen: React.FC = () => {
       {/* Caixa de Mensagem Rápida */}
       <form
         onSubmit={handleAddPost}
-        className="bg-white rounded-2xl p-3 border border-[#e5eeff] shadow-sm flex items-center gap-2"
+        className="bg-white rounded-[1.9rem] p-3 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_12px_28px_-16px_rgba(38,26,150,0.3)] flex items-center gap-2"
       >
         <img
           src={APP_IMAGES.userProfile}
@@ -142,7 +142,7 @@ export const TurmaScreen: React.FC = () => {
         {posts.map((post) => (
           <div
             key={post.id}
-            className="bg-white rounded-2xl p-4 shadow-sm border border-[#e5eeff] space-y-2.5"
+            className="bg-white rounded-[1.9rem] p-4 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] space-y-2.5"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">

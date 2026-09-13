@@ -17,7 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isProfessor = currentUser.role === 'professor';
 
   return (
-    <header className="fixed top-0 w-full z-50 pt-safe bg-[#fbfcff]/70 backdrop-blur-2xl border-b border-white/60 shadow-[0_8px_24px_-16px_rgba(58,52,211,0.25)]">
+    <header className="fixed top-0 w-full z-50 pt-safe bg-[#fbfcff]/75 backdrop-blur-2xl border-b-2 border-[#e2dfff]/80 shadow-[0_10px_30px_-16px_rgba(58,52,211,0.35)]">
       <div className="h-16 px-4 max-w-lg mx-auto flex items-center justify-between gap-2">
         {isFocoAtivo ? (
           <div className="flex items-center gap-2">
@@ -62,9 +62,9 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-1.5 sm:gap-2">
           {!isProfessor ? (
             /* Streak indicator for student */
-            <div className="flex items-center gap-1 bg-[#ffdad3] text-[#3d0600] px-2.5 py-1 rounded-full shadow-sm">
+            <div className="flex items-center gap-1 bg-[#ffdad3] text-[#3d0600] px-2.5 py-1 rounded-full shadow-sm sticker-chip border-[#ffb4a4]">
               <span
-                className="material-symbols-outlined text-[15px] text-[#b22200]"
+                className="material-symbols-outlined text-[15px] text-[#b22200] animate-wiggle"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 local_fire_department

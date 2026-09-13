@@ -58,7 +58,7 @@ export const SalasScreen: React.FC<SalasScreenProps> = ({
 
       {/* SALA VIRTUAL AO VIVO (Criada pelo Professor) */}
       {virtualRoom && virtualRoom.isActive && (
-        <div className="bg-gradient-to-r from-[#005d3e] via-[#00472f] to-[#0b1c30] text-white p-4 sm:p-5 rounded-3xl shadow-lg border border-[#6ffbbe]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
+        <div className="bg-gradient-to-r from-[#005d3e] via-[#00472f] to-[#0b1c30] text-white p-4 sm:p-5 rounded-[1.9rem] border-2 border-[#6ffbbe]/40 shadow-[0_18px_40px_-18px_rgba(0,93,62,0.6)] flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-[#6ffbbe]/20 text-[#6ffbbe] flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[26px] animate-pulse">
@@ -86,7 +86,7 @@ export const SalasScreen: React.FC<SalasScreenProps> = ({
           <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
             <button
               onClick={onEnterVirtualRoom}
-              className="px-4 py-2.5 rounded-xl bg-[#6ffbbe] hover:bg-[#52ebb0] text-[#005236] font-bold text-[13px] flex items-center gap-2 transition-all shadow-md active:scale-95"
+              className="px-4 py-2.5 rounded-xl bg-[#6ffbbe] hover:bg-[#52ebb0] text-[#005236] font-bold text-[13px] flex items-center gap-2 transition-all active:scale-95 cartoon-btn"
             >
               <span className="material-symbols-outlined text-[18px]">co_present</span>
               <span>Entrar como Aluno</span>
@@ -145,7 +145,7 @@ export const SalasScreen: React.FC<SalasScreenProps> = ({
           return (
             <div
               key={sub.id}
-              className="flex flex-col bg-white rounded-2xl p-5 shadow-[0_8px_24px_-4px_rgba(84,82,236,0.06)] border border-[#e5eeff] relative overflow-hidden transition-all duration-300 hover:shadow-lg"
+              className="flex flex-col bg-white rounded-[1.9rem] p-5 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] relative overflow-hidden transition-all duration-300 hover:shadow-lg"
             >
               {/* Top Accent Strip */}
               <div

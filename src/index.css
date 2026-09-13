@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Sora", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Baloo 2", "Sora", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --color-primary: #3a34d3;
   --color-primary-container: #5452ec;
   --color-primary-fixed: #e2dfff;
@@ -183,5 +183,114 @@ body::after {
 }
 .pt-safe {
   padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* ============================================================
+   CAMADA CARTOON "+Foco POP"
+   Visual lúdico e acolhedor (cards "sticker", botões 3D, chips,
+   mascotes de foco) — somente estética, nenhuma lógica alterada.
+   ============================================================ */
+
+/* Cards estilo adesivo: cantos de balão + borda grossa + profundidade. */
+.cartoon-card {
+  border-radius: 1.9rem;
+  border: 2px solid rgba(58, 52, 211, 0.16);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.95),
+    0 18px 44px -22px rgba(38, 26, 150, 0.4);
+}
+
+/* Botões "tecla de brinquedo": rebordo 3D que "afunda" ao tocar. */
+.cartoon-btn {
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.3),
+    0 6px 0 rgba(58, 52, 211, 0.32),
+    0 16px 28px -14px rgba(58, 52, 211, 0.5);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+.cartoon-btn:hover {
+  filter: brightness(1.05);
+}
+.cartoon-btn:active {
+  transform: translateY(5px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 1px 0 rgba(58, 52, 211, 0.3),
+    0 4px 10px -8px rgba(58, 52, 211, 0.45);
+}
+
+/* Chips/pílulas estilo adesivo com borda na cor do texto. */
+.sticker-chip {
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.65),
+    0 6px 14px -9px rgba(0, 0, 0, 0.3);
+}
+
+/* Campos de entrada com "bochechas" confortáveis. */
+.cartoon-input {
+  border-radius: 1.1rem;
+  border: 2px solid transparent;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 2px rgba(90, 80, 220, 0.2),
+    0 8px 18px -12px rgba(38, 26, 150, 0.3);
+}
+.cartoon-input:focus {
+  border-color: rgba(84, 82, 236, 0.7);
+  outline: none;
+}
+
+/* Balanço de "mascote" (emoji de foco). */
+.animate-wiggle {
+  animation: foco-wiggle 2.4s ease-in-out infinite;
+}
+@keyframes foco-wiggle {
+  0%,
+  100% {
+    transform: rotate(-5deg) translateY(0);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-4px);
+  }
+}
+
+/* Flutuação suave (blobs/stickers). */
+.animate-float-soft {
+  animation: foco-float-soft 5s ease-in-out infinite;
+}
+@keyframes foco-float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Entrada "pop" para telas/cards. */
+.animate-pop-in {
+  animation: foco-pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes foco-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-wiggle,
+  .animate-float-soft,
+  .animate-pop-in {
+    animation: none;
+  }
 }
 

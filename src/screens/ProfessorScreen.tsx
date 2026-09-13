@@ -36,7 +36,7 @@ export const ProfessorScreen: React.FC<ProfessorScreenProps> = ({
   return (
     <div className="flex flex-col w-full gap-5 pb-12">
       {/* Teacher Profile & Live Class Bar */}
-      <div className="bg-[#0b1c30] text-white rounded-3xl p-5 shadow-lg relative overflow-hidden space-y-4">
+      <div className="bg-[#0b1c30] text-white rounded-[1.9rem] p-5 border-2 border-[#3a34d3]/60 shadow-[0_20px_44px_-20px_rgba(11,28,48,0.6)] relative overflow-hidden space-y-4">
         <div className="absolute -top-16 -right-16 w-52 h-52 bg-[#3a34d3] opacity-30 rounded-full blur-2xl"></div>
 
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -97,7 +97,7 @@ export const ProfessorScreen: React.FC<ProfessorScreenProps> = ({
       </div>
 
       {/* AUTONOMIA DA SALA VIRTUAL (Card de Acesso Rápido do Professor) */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e5eeff] space-y-3">
+      <div className="cartoon-card bg-white p-4 border-[#e2dfff] space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
             <div

@@ -45,8 +45,13 @@ export const EntrarSalaScreen: React.FC<EntrarSalaScreenProps> = ({
 
       {/* Body */}
       <main className="flex-1 flex flex-col items-center justify-center gap-6 px-6 py-8">
-        <div className="w-16 h-16 rounded-3xl bg-[#3a34d3]/30 text-[#b6c0ff] flex items-center justify-center border border-[#3a34d3]/40">
-          <span className="material-symbols-outlined text-[32px]">vpn_key</span>
+        <div className="relative">
+          <div className="w-16 h-16 rounded-[1.75rem] bg-[#3a34d3]/30 text-[#b6c0ff] flex items-center justify-center border-2 border-[#3a34d3]/50 animate-float-soft">
+            <span className="material-symbols-outlined text-[32px]">vpn_key</span>
+          </div>
+          <span className="absolute -top-2 -right-3 text-[22px] animate-wiggle select-none" role="img" aria-label="chave">
+            🔑
+          </span>
         </div>
 
         <div className="text-center">
@@ -75,7 +80,7 @@ export const EntrarSalaScreen: React.FC<EntrarSalaScreenProps> = ({
           <button
             type="submit"
             disabled={!code.trim()}
-            className="w-full py-3 rounded-xl bg-[#3a34d3] hover:bg-[#5452ec] disabled:opacity-40 disabled:pointer-events-none text-white font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]"
+            className="w-full py-3 rounded-xl bg-[#3a34d3] hover:bg-[#5452ec] disabled:opacity-40 disabled:pointer-events-none text-white font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] cartoon-btn"
           >
             <span className="material-symbols-outlined text-[18px]">meeting_room</span>
             Entrar na sala

@@ -96,7 +96,7 @@ export const FocoAtivoScreen: React.FC<FocoAtivoScreenProps> = ({
       </div>
 
       {/* Identificação da Aula e Ambiente */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-[#e5eeff] space-y-3">
+      <div className="bg-white rounded-[1.9rem] p-5 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] space-y-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#e5eeff] text-[#3a34d3] text-[11px] font-bold">
@@ -199,7 +199,7 @@ export const FocoAtivoScreen: React.FC<FocoAtivoScreenProps> = ({
       </div>
 
       {/* Timeline de Etapas da Aula */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-[#e5eeff] space-y-4">
+      <div className="bg-white rounded-[1.9rem] p-5 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-[16px] font-bold text-[#0b1c30]">Jornada da Aula</h3>
           <span className="text-[11px] text-[#3a34d3] font-bold bg-[#e2dfff] px-2 py-0.5 rounded">
@@ -351,7 +351,7 @@ export const FocoAtivoScreen: React.FC<FocoAtivoScreenProps> = ({
       </div>
 
       {/* Gerador de Som Ambiente de Concentração (Áudio Real) */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#e5eeff] flex flex-col gap-3">
+      <div className="bg-white rounded-[1.9rem] p-4 border-2 border-[#e2dfff] shadow-[inset_0_3px_0_rgba(255,255,255,0.95),0_14px_34px_-18px_rgba(38,26,150,0.35)] flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   TabType,
   Subject,
   UserProfile,
+  UserRole,
   DoubtItem,
   ActivitySubmission,
   TeacherActivity,
@@ -39,6 +40,14 @@ export default function App() {
   // Authentication & User State
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<UserProfile>(DEFAULT_USERS.teachers[0]);
+  // Papel da conta definido no login/cadastro — usado para decidir a tela. Ele é
+  // gravado no momento do login e NUNCA é rebaixado por atualizações assíncronas
+  // de perfil (ex.: onAuthChange), garantindo que professor não caia na Sala Virtual.
+  const [accountRole, setAccountRole] = useState<UserRole>('aluno');
+  // Login feito pelo formulário (login/cadastro) já define o perfil correto — o
+  // listener do onAuthChange não deve sobrescrever esse perfil (evita que o
+  // professor "caia" na tela de aluno/sala virtual logo após entrar).
+  const formLoginRef = useRef(false);
 
   // Navigation State
   const [currentTab, setCurrentTab] = useState<TabType>('salas');
@@ -109,10 +118,13 @@ export default function App() {
       }
       loadProfile(user)
         .then((profile) => {
+          if (formLoginRef.current) return;
           setCurrentUser(profile);
+          setAccountRole(profile.role);
           setIsAuthenticated(true);
         })
         .catch(() => {
+          if (formLoginRef.current) return;
           setIsAuthenticated(true);
         });
     });
@@ -121,7 +133,9 @@ export default function App() {
 
   // Login handler
   const handleLogin = (user: UserProfile) => {
+    formLoginRef.current = true;
     setCurrentUser(user);
+    setAccountRole(user.role);
     setJoinedRoomId(null);
     setJoinError(null);
     setIsAuthenticated(true);
@@ -136,6 +150,8 @@ export default function App() {
 
   // Logout handler
   const handleLogout = () => {
+    formLoginRef.current = false;
+    setAccountRole('aluno');
     logOut().catch(() => {});
     setJoinedRoomId(null);
     setJoinError(null);
@@ -312,7 +328,7 @@ export default function App() {
     return <LoginScreen onLogin={handleLogin} />;
   }
 
-  const isProfessor = currentUser.role === 'professor';
+  const isProfessor = accountRole === 'professor';
   // Para o aluno, a única tela que permanece é a Sala Virtual (sem navegação).
   const isStudent = !isProfessor;
   const isSalaVirtual = isStudent || currentTab === 'sala-virtual';
