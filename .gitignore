@@ -8,10 +8,15 @@
 !/package-lock.json
 !/tsconfig.json
 !/vite.config.ts
+!/capacitor.config.ts
 !/src/
 !/public/
+!/android/
+!/.github/
 !/src/**
 !/public/**
+!/android/**
+!/.github/**
 node_modules/
 dist/
 *.log
