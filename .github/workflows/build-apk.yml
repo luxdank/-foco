@@ -33,17 +33,32 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - name: Accept Android SDK licenses
-        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
+      - name: Prepare Android SDK (API 36)
+        run: |
+          set -euxo pipefail
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          if [ -x "$SDKMANAGER" ]; then
+            yes | "$SDKMANAGER" --licenses
+            "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0"
+          else
+            echo "sdkmanager not found at [$SDKMANAGER]"
+            find / -name sdkmanager -type f 2>/dev/null || true
+            exit 1
+          fi
+          "$SDKMANAGER" --list_installed | grep -E "platforms;android-36|build-tools;36" || true
 
       - name: Build debug APK
         working-directory: android
         run: |
+          set -euxo pipefail
+          java -version
           chmod +x gradlew
+          ./gradlew --version
           ./gradlew --no-daemon assembleDebug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: foco-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
