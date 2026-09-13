@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Sora", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-primary: #3a34d3;
+  --color-primary-container: #5452ec;
+  --color-primary-fixed: #e2dfff;
+  --color-primary-fixed-dim: #c1c1ff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #e9e6ff;
+  --color-on-primary-fixed: #0a006b;
+  --color-on-primary-fixed-variant: #2e26ca;
+
+  --color-secondary: #b22200;
+  --color-secondary-container: #d73b19;
+  --color-secondary-fixed: #ffdad3;
+  --color-secondary-fixed-dim: #ffb4a4;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #fffbff;
+  --color-on-secondary-fixed: #3d0600;
+  --color-on-secondary-fixed-variant: #8c1800;
+
+  --color-tertiary: #005d3e;
+  --color-tertiary-container: #007852;
+  --color-tertiary-fixed: #6ffbbe;
+  --color-tertiary-fixed-dim: #4edea3;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #8fffc9;
+  --color-on-tertiary-fixed: #002113;
+  --color-on-tertiary-fixed-variant: #005236;
+
+  --color-surface: #f8f9ff;
+  --color-surface-dim: #cbdbf5;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-container-high: #dce9ff;
+  --color-surface-container-highest: #d3e4fe;
+  --color-surface-variant: #d3e4fe;
+  --color-surface-tint: #4946e1;
+
+  --color-on-surface: #0b1c30;
+  --color-on-surface-variant: #464555;
+  --color-outline: #777587;
+  --color-outline-variant: #c7c4d8;
+  --color-inverse-surface: #213145;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-inverse-primary: #c1c1ff;
+}
+
+/* ============================================================
+   IDENTIDADE VISUAL "+Foco AURORA"
+   Camada de design aplicada globalmente SEM alterar a estrutura.
+   ============================================================ */
+
+/* Tipografia de display: títulos ganham personalidade (Sora). */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Fundo "aurora matinal": névoa violeta + hortelã + pêssego sobre base clara. */
+body {
+  background-color: #fbfcff;
+  background-image:
+    radial-gradient(42rem 30rem at 88% -12%, rgba(213, 207, 255, 0.9), transparent 55%),
+    radial-gradient(36rem 28rem at -8% 22%, rgba(184, 255, 224, 0.55), transparent 55%),
+    radial-gradient(40rem 32rem at 108% 98%, rgba(255, 210, 196, 0.5), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Grão de filme sutil sobre tudo (dá textura, tira o ar "flat"). */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Seleção de texto na cor da marca. */
+::selection {
+  background: rgba(124, 108, 255, 0.25);
+}
+
+/* Scrollbar moderna, discreta e na cor da marca. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(58, 52, 211, 0.3) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(58, 52, 211, 0.28);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(58, 52, 211, 0.5);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* Botões primários: deixam de ser um bloco plano e ganham gradiente + brilho. */
+.bg-\[\#3a34d3\] {
+  background-color: #4338f0;
+  background-image: linear-gradient(135deg, #7c6cff 0%, #5b4bf7 45%, #4338f0 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 10px 24px -12px rgba(88, 74, 242, 0.6);
+}
+.bg-\[\#3a34d3\].hover\:bg-\[\#5452ec\]:hover {
+  background-image: linear-gradient(135deg, #8d7fff 0%, #6d5df8 50%, #4f43f2 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 14px 30px -12px rgba(88, 74, 242, 0.75);
+}
+
+/* Superfícies "tinta" (escuro profundo): profundidade suave em vez de bloco chapado. */
+.bg-\[\#0b1c30\] {
+  background-image: linear-gradient(180deg, #14294a 0%, #0b1c30 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.bg-\[\#0b1c30\].hover\:bg-\[\#1b2b40\]:hover {
+  background-image: linear-gradient(180deg, #1d355c 0%, #14294a 100%);
+}
+
+/* Texto em gradiente da marca (para wordmarks/títulos). */
+.text-gradient-primary {
+  background-image: linear-gradient(100deg, #7c6cff 0%, #3a34d3 45%, #5b4bf7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Blobs decorativos flutuantes (fundo do login e telas claras). */
+.animate-blob {
+  animation: foco-float 16s ease-in-out infinite alternate;
+}
+.animate-blob-delay {
+  animation-delay: -8s;
+}
+@keyframes foco-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(36px, -28px, 0) scale(1.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-blob-delay {
+    animation: none;
+  }
+}
+
+/* Custom scrollbar hiding and safe area utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+

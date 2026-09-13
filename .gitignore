@@ -1,0 +1,17 @@
+# Whitelist: somente os arquivos do projeto +Foco são versionados.
+# O restante da pasta Downloads (fotos, PDFs, instaladores) fica de fora.
+/*
+!/.gitignore
+!/README.md
+!/index.html
+!/package.json
+!/package-lock.json
+!/tsconfig.json
+!/vite.config.ts
+!/src/
+!/public/
+!/src/**
+!/public/**
+node_modules/
+dist/
+*.log
